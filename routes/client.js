@@ -7,20 +7,20 @@ const { model } = require("../model/client");
 
 // add the client to the database 
 
-router.post("/client/add",clientController.addClient); 
+router.post("/add",clientController.addClient); 
 
 // get the clients from the database 
 
 
-router.get("/client/clients", clientController.getClients);
+router.get("/getclients", clientController.getClients);
 
 // get the client by id 
 
-router.get("/client/getclientbyid/:id", clientController.getClientById);
+router.get("/getclientbyid/:id", clientController.getClientById);
 
 // delete the client by id ; 
 
-router.delete("/client/deleteclient/:id", clientController.deleteClientById);
+router.delete("/deleteclient/:id", clientController.deleteClientById);
 
 // update the client by id; 
 
