@@ -1,5 +1,6 @@
+const { response } = require("express");
 const { reset } = require("nodemon");
-const { findById } = require("../model/client");
+const { findById, emit } = require("../model/client");
 const Client = require("../model/client"); 
 
 // add client into the database 
@@ -90,6 +91,36 @@ exports.deleteClientById  = async (req, res, next) => {
 
     }
     catch(error){
+        console.log(error);
+    }
+
+}
+
+
+// update the client by id 
+
+exports.updateClientById = async(req, res, next) => { 
+    try{
+        const id = req.params.id; 
+        const { firstName, lastName, email, phone, balance} = req.body; 
+
+        const client = await Client.findById(id); 
+        if(client){
+            client.firstName = firstName; 
+            client.lastName = lastName;
+            client.email = email;
+            client.phone = phone; 
+            client.balance = balance;
+            await client.save(); 
+            return res.status(201).json({msg:"client is updated"});
+        }
+        else{
+            return res.status(400).json({msg:"client is not found"});
+        }
+
+        
+
+    }catch(error){
         console.log(error);
     }
 
