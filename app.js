@@ -13,12 +13,19 @@ mongoDb();
 
 const app = express(); 
 
-
+app.use(cors());
 app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.use("/test", (req, res, next) => { 
     res.send("this is testing going on ")
 })
+
+// client router
+const clientRouter = require("./routes/client");
+
+app.use(clientRouter);
+
 
 const PORT = process.env.PORT || 5000; 
 
