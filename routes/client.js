@@ -18,5 +18,9 @@ router.get("/client/clients", clientController.getClients);
 
 router.get("/client/getclientbyid/:id", clientController.getClientById);
 
+// delete the client by id ; 
+
+router.delete("/client/deleteclient/:id", clientController.deleteClientById);
+
 
 module.exports = router;

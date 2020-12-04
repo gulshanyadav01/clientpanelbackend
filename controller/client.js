@@ -1,3 +1,5 @@
+const { reset } = require("nodemon");
+const { findById } = require("../model/client");
 const Client = require("../model/client"); 
 
 // add client into the database 
@@ -69,4 +71,26 @@ exports.getClientById =  async (req, res, next) => {
     }catch(error){
         console.log(error);
     }
+}
+
+
+// delete the client by id 
+
+exports.deleteClientById  = async (req, res, next) => { 
+    try{
+        const id = req.params.id;
+        const client  = await  Client.findById(id); 
+        if(client){
+            await client.remove();
+            res.status(201).json({msg:"client is deleted"});
+        }
+        else{
+           return  res.status(400).json({msg:"client not found "})
+        }
+
+    }
+    catch(error){
+        console.log(error);
+    }
+
 }
