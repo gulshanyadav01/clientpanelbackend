@@ -11,7 +11,12 @@ router.post("/client/add",clientController.addClient);
 
 // get the clients from the database 
 
+
 router.get("/client/clients", clientController.getClients);
+
+// get the client by id 
+
+router.get("/client/getclientbyid/:id", clientController.getClientById);
 
 
 module.exports = router;

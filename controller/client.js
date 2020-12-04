@@ -35,9 +35,9 @@ exports.addClient = async (req, res, next) => {
 
 exports.getClients  = async (req, res, next) => { 
     try{
-        const client = await Client.find();
-        if(client){
-            res.status(200).json({client});
+        const clients = await Client.find();
+        if(clients){
+            res.status(200).json({clients});
         }
         else{
             return res.status(400).json({msg:"not found"});
@@ -47,4 +47,26 @@ exports.getClients  = async (req, res, next) => {
         console.log(error);
     }
 
+}
+
+
+// get clients by id 
+
+exports.getClientById =  async (req, res, next) => { 
+
+    try{
+        const id  = req.params.id ;
+        // console.log(id);
+        const client = await Client.findById(id);
+        if(client){
+            res.status(200).json({client});
+        }
+        else{
+            return res.status(400).json({msg:"not found"});
+        }
+
+
+    }catch(error){
+        console.log(error);
+    }
 }
