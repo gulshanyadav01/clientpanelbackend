@@ -1,13 +1,25 @@
 const User = require("../model/user");
+const bcyrpt = require("bcryptjs")
 
 exports.getSignup = async (req, res, next) => {
     try{
         const { name, email, password } = req.body; 
-        const user = new User({
+        let  user  = await User.findOne({email: email});
+        if(user){
+            return res.status(404).json({msg:"user is already created please try different one"}) 
+        }
+        let hashPassword;
+        hashPassword = await bcyrpt.hash(password, 12);
+        if(!hashPassword){
+            return res.status(404).json({msg:"user is not created"});
+        }
+        
+         user = new User({
             name, 
             email,
-            password
+            password:hashPassword
         })
+
         const response = await user.save();
         if(response){
             res.status(201).json({msg:"user is created"});
@@ -20,4 +32,21 @@ exports.getSignup = async (req, res, next) => {
         console.log(error);
     }
    
+}
+
+
+exports.Login = async(req, res, next) => { 
+    try{
+        const{ email, password} = req.body;
+        const user = await User.findOne({email:email, password:password});
+        if(user){
+            res.status(200).json({msg:"this is your user", user});
+        }
+        else{
+            return res.status(404).json({msg:"user is not found please sign up"});
+        }
+        
+    }catch(error) {
+        console.log(error);
+    }
 }
