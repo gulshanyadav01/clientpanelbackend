@@ -23,9 +23,10 @@ app.use("/test", (req, res, next) => {
 
 // client router
 const clientRouter = require("./routes/client");
+const authRouter = require("./routes/user");
 
 app.use("/client", clientRouter);
-
+app.use("/user/", authRouter);
 
 const PORT = process.env.PORT || 5000; 
 
