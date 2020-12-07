@@ -51,7 +51,14 @@ exports.Login = async(req, res, next) => {
             if(!isValidPass){
                 return res.status(404).json({msg:"invalid credential please try again later"})
             }
-            return res.status(200).json({msg:"this is your user", user});
+            let token;
+            token = jwt.sign({
+                userId:user._id,
+                email: user.email
+            }, "supersecret_don't_share", {expiresIn: "1h"});
+
+            return res.status(200).json({userId: user._id, email:user.email, token: token});
+
         }
         if(!user){
             return res.status(404).json({msg:"user is not found please sign up"});
