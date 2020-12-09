@@ -28,8 +28,8 @@ exports.getSignup = async (req, res, next) => {
         token = jwt.sign({
             userId:createdUser._id,
             email: createdUser.email
-        }, "supersecret_don't_share", {expiresIn: "1h"});
-         res.status(201).json({userId: createdUser.id, email: createdUser.email, token: token});
+        }, "supersecret_don't_share", {expiresIn:360000});
+         res.status(201).json({token});
 
        
         
@@ -57,7 +57,7 @@ exports.Login = async(req, res, next) => {
                 email: user.email
             }, "supersecret_don't_share", {expiresIn: "1h"});
 
-            return res.status(200).json({userId: user._id, email:user.email, token: token});
+            return res.status(200).json({token: token});
 
         }
         if(!user){
@@ -68,4 +68,34 @@ exports.Login = async(req, res, next) => {
     }catch(error) {
         console.log(error);
     }
+}
+
+
+// exports.getUserInfo = async(req, res, next) => {
+//     try {
+//         const user = await (await User.findById(req.user.id).populate('book')).execPopulate()
+
+//         if (!user) {
+//             return res.status(401).json({ msg: "Not authorized" })
+//         }
+
+//         res.status(200).json({ user });
+//     } catch (err) {
+//         console.log(err);
+//     }
+// }
+
+
+
+exports.getUserDetails = async(req, res, next) => {
+    try{
+        const user = await User.findById(req.user.id);
+        if(!user){
+            return res.status(401).json({ msg: "Not authorized" })
+        }
+        res.status(200).json({user});
+    }catch(error){
+        console.log(error);
+    }
+
 }

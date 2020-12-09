@@ -10,7 +10,7 @@ const colors = require("colors");
             useUnifiedTopology: true
          }); 
          
-             console.log("connected to database".yellow.bold.underline);
+             console.log("connected to database".cyan.bold.underline);
          
 
     }
