@@ -4,6 +4,7 @@ const router = express.Router();
 
 const clientController = require("../controller/client");
 const { model } = require("../model/client");
+
 const checkAuth = require("../middleware/checkAuth")
 
 // add the client to the database 
@@ -15,7 +16,7 @@ router.post("/add",checkAuth, clientController.addClient);
 // get the clients from the database 
 
 
-router.get("/getclients", checkAuth, clientController.getClients);
+router.get("/getclients",checkAuth, clientController.getClients);
 
 // get the client by id 
 
