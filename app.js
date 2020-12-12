@@ -25,7 +25,7 @@ app.use("/test", (req, res, next) => {
 const clientRouter = require("./routes/client");
 const authRouter = require("./routes/user");
 
-app.use("/user/", authRouter);
+// app.use("/user/", authRouter);
 
 app.use("/client", clientRouter);
 

@@ -13,6 +13,7 @@ const { model } = require("../model/user");
 router.post("/signup", authController.getSignup); 
 
 router.post("/login", authController.Login);
+
 router.get("/", auth, authController.getUserDetails);
 
-module.exports = router; 
+module.exports = router;

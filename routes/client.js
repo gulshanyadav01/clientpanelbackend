@@ -11,16 +11,16 @@ const checkAuth = require("../middleware/checkAuth")
 
 // router.use(checkAuth);
 
-router.post("/add",checkAuth, clientController.addClient); 
+router.post("/add", clientController.addClient); 
 
 // get the clients from the database 
 
 
-router.get("/getclients",checkAuth, clientController.getClients);
+router.get("/getclients", clientController.getClients);
 
 // get the client by id 
 
-router.get("/getclientbyid/:id", checkAuth, clientController.getClientById);
+router.get("/getclientbyid/:id", clientController.getClientById);
 
 // delete the client by id ; 
 
