@@ -2,6 +2,7 @@ const { response } = require("express");
 const { reset } = require("nodemon");
 const { findById, emit } = require("../model/client");
 const Client = require("../model/client"); 
+const User = require("../model/user");
 
 // add client into the database 
 
@@ -124,4 +125,26 @@ exports.updateClientById = async(req, res, next) => {
         console.log(error);
     }
 
+}
+
+
+exports.pushClient = async(req, res, next) => {
+    try{
+        const response = await User.findById(req.user.id);
+        const newContact = {
+            firstName:"gulshan",
+            lastName:"yadav",
+            email:"gulshany01@gmail.com",
+            balance:"10",
+            phone:"8860098313"
+        }
+        response.data.push(newContact);
+        await response.save();
+        console.log(response)
+    }catch(err){
+        console.log(err);
+    }
+    
+
+    
 }

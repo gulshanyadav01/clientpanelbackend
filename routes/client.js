@@ -5,7 +5,8 @@ const router = express.Router();
 const clientController = require("../controller/client");
 const { model } = require("../model/client");
 
-const checkAuth = require("../middleware/checkAuth")
+const checkAuth = require("../middleware/checkAuth");
+const { route } = require("./user");
 
 // add the client to the database 
 
@@ -30,5 +31,7 @@ router.delete("/deleteclient/:id", checkAuth, clientController.deleteClientById)
 
 router.put("/updateclient/:id" , checkAuth,  clientController.updateClientById);
 
+
+router.get("/pushData", checkAuth, clientController.pushClient);
 
 module.exports = router;
