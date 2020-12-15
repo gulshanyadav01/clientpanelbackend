@@ -128,23 +128,38 @@ exports.updateClientById = async(req, res, next) => {
 }
 
 
-exports.pushClient = async(req, res, next) => {
+exports.postPushClient = async(req, res, next) => {
     try{
         const response = await User.findById(req.user.id);
+        const {firstName, lastName, email, balance, phone} = req.body;
         const newContact = {
-            firstName:"gulshan",
-            lastName:"yadav",
-            email:"gulshany01@gmail.com",
-            balance:"10",
-            phone:"8860098313"
+            firstName, 
+            lastName,
+            email,
+            balance,
+            phone
         }
         response.data.push(newContact);
         await response.save();
-        console.log(response)
+        res.status(201).json({msg:"done"})
+
     }catch(err){
         console.log(err);
     }
     
 
     
+}
+
+exports.getPushClient = async(req, res, next) => {
+    try{
+        const response = await User.findById(req.user.id);
+        if(!response){
+            res.status(400).json({msg:"user not found"});
+        }
+       return  res.status(201).json(response.data);
+    }catch(err){
+        console.log(err);
+    }
+
 }

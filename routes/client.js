@@ -32,6 +32,8 @@ router.delete("/deleteclient/:id", checkAuth, clientController.deleteClientById)
 router.put("/updateclient/:id" , checkAuth,  clientController.updateClientById);
 
 
-router.get("/pushData", checkAuth, clientController.pushClient);
+router.post("/postPushData", checkAuth, clientController.postPushClient);
+
+router.get("/getPushData", checkAuth, clientController.getPushClient);
 
 module.exports = router;
