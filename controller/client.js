@@ -160,7 +160,7 @@ exports.getPushClient = async(req, res, next) => {
        return  res.status(201).json(response.data);
     }catch(err){
         console.log(err);
-        console.log(err.msg);
+        // console.log(err.msg);
     }
 
 }
