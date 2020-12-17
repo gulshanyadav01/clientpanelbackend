@@ -150,7 +150,7 @@ exports.postPushClient = async(req, res, next) => {
 }
     
 
-exports.getPushClient = async(req, res, next) => {
+export.getPushClient = async(req, res, next) => {
     try{
         const response = await User.findById(req.user.id);
         if(!response){
