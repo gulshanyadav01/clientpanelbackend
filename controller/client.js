@@ -149,7 +149,6 @@ exports.postPushClient = async(req, res, next) => {
     
 
     
-}
 
 exports.getPushClient = async(req, res, next) => {
     try{
